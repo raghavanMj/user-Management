@@ -52,9 +52,13 @@ const login = async (req, res) => {
   if (!isMatch) {
     throw new Error("Invalid Email or Password.....!");
   }
-  const Token = JWT.sign({ id: userFind._id }, process.env.JWT_TOKEN_KEY, {
-    expiresIn: "30d",
-  });
+  const Token = JWT.sign(
+    { id: userFind._id },
+    process.env.JWT_TOKEN_KEY || "srgfxbcnvhmgho876534hgfnvdrDHGFVBNM9876",
+    {
+      expiresIn: "30d",
+    }
+  );
   res.json({
     message: "Login Success",
     Token,

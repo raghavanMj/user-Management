@@ -20,7 +20,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../Redux/Actions/userActions";
+import { loginUser, registerUser } from "../../Redux/Actions/userActions";
 
 function NewRegister() {
   const [signIn, toggle] = useState(true);
@@ -54,7 +54,10 @@ function NewRegister() {
   const handleRegisterInputs = (e) => {
     const { name, value } = e.target;
     setPasswordErr(false);
-    if (name === "phone") {
+    if (name === "role") {
+      console.log(e.target.value);
+      setSignUpData({ ...signUpData, role: value });
+    } else if (name === "phone") {
       let _sliced = value.slice(0, 10);
       setSignUpData({ ...signUpData, phone: _sliced });
     } else if (name === "name" || name === "email") {
@@ -69,13 +72,14 @@ function NewRegister() {
     let body = { ...signInInputs };
 
     delete body.conform_password;
+    dispatch(loginUser(body, navigate));
   };
 
   const handleSignUp = async (e) => {
     if (signUpData.password !== signUpData.conform_password) {
       setPasswordErr(true);
     } else {
-      let body = { ...signUpData, role: "user" };
+      let body = { ...signUpData };
 
       delete body.conform_password;
       console.log(body);
@@ -233,7 +237,6 @@ function NewRegister() {
                   className={classes.roleDropdown}
                   id="emailInput"
                   placeholder="Phone"
-                  className={`my-field`}
                   name={"role"}
                   value={signUpData.role}
                   select
