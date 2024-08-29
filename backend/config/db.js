@@ -4,7 +4,7 @@ const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
       process.env.MONGO_URI ||
-        "mongodb+srv://raghavanicore:kQqVmicL4DC9xgrA@cluster0.ya7nc.mongodb.net",
+        "mongodb+srv://raghavanicore:CEjB6kAbKjuZILwj@cluster0.ya7nc.mongodb.net/user-management",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
