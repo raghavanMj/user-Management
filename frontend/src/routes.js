@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import DefaultLayout from "./layout/DefaultLayout";
 import NewRegister from "./Pages/Auth/NewRegister";
-import HomeIndex from "./Pages/Home/index";
+import HomeIndex from "./Pages/Home";
 
 const Router = createBrowserRouter([
   {

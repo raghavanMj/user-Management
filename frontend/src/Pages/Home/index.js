@@ -1,13 +1,6 @@
 import React, { useEffect } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Container,
-} from "@mui/material";
+import { Container, Typography } from "@mui/material";
+import { Table } from "antd";
 import classes from "./home.module.css";
 import { useSelector } from "react-redux";
 import { getUserList } from "../../Redux/Actions/userActions";
@@ -28,50 +21,56 @@ const HomeIndex = () => {
     navigate("/login");
   };
 
+  const columns = [
+    {
+      title: "User Name",
+      dataIndex: "firstName", // This will be the primary key, but we'll combine both names
+      key: "name",
+      render: (text, record) => `${record.firstName} ${record.lastName}`, // Combining first and last name
+      sorter: (a, b) => a.firstName.localeCompare(b.firstName), // Sorting based on firstName
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      filters: [
+        {
+          text: "User",
+          value: "user",
+        },
+        {
+          text: "Admin",
+          value: "admin",
+        },
+        {
+          text: "Guest",
+          value: "guest",
+        },
+      ],
+      onFilter: (value, record) => record.address.startsWith(value),
+    },
+  ];
+
+  const onChange = (pagination, filters, sorter, extra) => {
+    console.log("params", pagination, filters, sorter, extra);
+  };
+
   return (
     <div>
       <Container>
-        <div>
-          <Button onClick={handleLogout}>Logout</Button>
+        <div className={`mt-3`}>
+          <Typography variant="h4" className={classes.title}>
+            Users List
+          </Typography>
         </div>
-        <Table>
-          <TableHead className={classes.TableHeaderRow}>
-            <TableRow>
-              <TableCell flex={1} style={{ minWidth: 125 }}>
-                <span>User Name</span>
-              </TableCell>
-              <TableCell flex={1} style={{ minWidth: 125 }}>
-                <span>Phone</span>
-              </TableCell>
-              <TableCell flex={1} style={{ minWidth: 125 }}>
-                <span>Email</span>
-              </TableCell>
-              <TableCell flex={1} style={{ minWidth: 125 }}>
-                <span>Role</span>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {usersList &&
-              usersList.length > 0 &&
-              usersList.map((user) => (
-                <TableRow>
-                  <TableCell flex={1} style={{ minWidth: 125 }}>
-                    <span>{`${user.firstName} ${user.lastName}`}</span>
-                  </TableCell>
-                  <TableCell flex={1} style={{ minWidth: 125 }}>
-                    <span>{user.phone}</span>
-                  </TableCell>
-                  <TableCell flex={1} style={{ minWidth: 125 }}>
-                    <span>{user.email}</span>
-                  </TableCell>
-                  <TableCell flex={1} style={{ minWidth: 125 }}>
-                    <span>{user.role}</span>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+        <Table columns={columns} dataSource={usersList} onChange={onChange} />
       </Container>
     </div>
   );

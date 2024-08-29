@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { errorState, successState } from "../Redux/Actions/userActions";
+import ResponsiveAppBar from "./header";
 
 function DefaultLayout() {
   const { errorAlert, successAlert } = useSelector((state) => state.user);
@@ -35,9 +36,31 @@ function DefaultLayout() {
     }
   }, [successAlert]);
 
+  useEffect(() => {
+    if (!_token) {
+      navigate("/login");
+    } else {
+      navigate("/home");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [_token]);
+
   return (
     <Box className={classes.layout_container}>
-      <Outlet />
+      {window.location.pathname !== "/login" && (
+        <div className={classes.header}>
+          <ResponsiveAppBar />
+        </div>
+      )}
+      <div
+        className={
+          window.location.pathname === "/login"
+            ? classes.login_container
+            : classes.main_container
+        }
+      >
+        <Outlet />
+      </div>
       <ToastContainer />
     </Box>
   );

@@ -9,28 +9,26 @@ import {
   GET_USER_LIST_REQUEST_SUCCESS,
 } from "../Constants/userConstants";
 
-export const loginUser =
-  (userEntry, navigate, setErrorAlert) => async (dispatch) => {
-    try {
-      const { data } = await api.post("/auth/login", userEntry);
+export const loginUser = (userEntry, navigate) => async (dispatch) => {
+  try {
+    const { data } = await api.post("/auth/login", userEntry);
 
-      localStorage.setItem("userToken", JSON.stringify(data?.data[0]));
-      dispatch({
-        type: USER_LOGIN_REQUEST_SUCCESS,
-        payload: data?.data[0],
-      });
-      navigate("/dashboard");
-    } catch (error) {
-      dispatch({
-        type: USER_LOGIN_REQUEST_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      });
-      setErrorAlert(true);
-    }
-  };
+    localStorage.setItem("userToken", JSON.stringify(data));
+    dispatch({
+      type: USER_LOGIN_REQUEST_SUCCESS,
+      payload: data,
+    });
+    navigate("/home");
+  } catch (error) {
+    dispatch({
+      type: USER_LOGIN_REQUEST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const registerUser = (userEntry, navigate) => async (dispatch) => {
   try {
