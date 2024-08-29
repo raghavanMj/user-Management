@@ -1,0 +1,65 @@
+.register_container {
+  background-color: var(--primary-color) !important;
+  padding: 30px 16px;
+  border-radius: 5px;
+  width: 375px;
+}
+.input_icons {
+  font-size: 21px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.eye_icons {
+  font-size: 21px;
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer !important;
+}
+.register_btn {
+  background-color: var(--primary-color) !important;
+  text-transform: capitalize !important;
+  color: var(--secondary-color) !important;
+  border-radius: 20px !important;
+  font-size: 17px !important;
+  padding: 7px 60px !important;
+  font-weight: 500 !important;
+}
+.cancel_btn {
+  background-color: var(--secondary-color) !important;
+  text-transform: capitalize !important;
+  color: var(--primary-color) !important;
+  border-radius: 20px !important;
+  font-size: 17px !important;
+  padding: 7px 60px !important;
+  font-weight: 500 !important;
+  /* border: 1px solid var(--primary-color) !important; */
+}
+
+.already_acc {
+  color: var(--lite-green-color) !important;
+  font-size: 14px !important;
+  text-align: center;
+  margin-top: 20px !important;
+}
+.already_acc span:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--lite-green-color);
+}
+.login_title {
+  color: var(--secondary-color) !important;
+  font-size: 32px !important;
+  text-align: center;
+  font-weight: 600 !important;
+}
+.mysignupform {
+  overflow-y: scroll;
+  padding: 0px 0;
+  margin-bottom: 30px;
+}
+
+.mysignupform::-webkit-scrollbar {
+  display: none;
+}
+
+.roleDropdown div {
+  text-align: left !important;
+}
