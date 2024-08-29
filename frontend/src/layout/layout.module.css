@@ -1,0 +1,11 @@
+.layout_container{
+    height: 100vh !important;
+    display: grid;
+    place-items: center;
+    /* background-image: url("../assets/images/login-bg1.jpg"); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background: rgb(0,85,80);
+background: linear-gradient(180deg, rgba(0,85,80,1) 44%, rgba(69,122,119,1) 100%); */
+}
